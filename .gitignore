@@ -1,0 +1,23 @@
+# quartus rules
+*/db/
+*/incremental_db/
+*/qdb/
+*/tmp-clearbox
+*.bak
+*.stp
+
+# Intel Stuff
+*.sof
+*/sim/*/altera/*
+*/sim/*/lpm/*
+*/sim/*/work/*
+*/sim/*.wlf
+
+# Xilinx Stuff
+*.dcp
+*.pb
+*.vds
+
+
+*/output_files/
+
