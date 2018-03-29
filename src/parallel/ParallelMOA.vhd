@@ -12,9 +12,10 @@ entity ParallelMOA is
     SUM_WIDTH    : natural := CONST_SUM_WIDTH
     );
     port(
+    clk_dsp    : in  std_logic;
     clk_sys    : in  std_logic;
     reset_n    : in  std_logic;
-    in_data    : in  std_logic_vector (DATA_WIDTH-1 downto 0);
+    in_data    : in  data_array (0 to NUM_OPERANDS-1);
     in_valid   : in  std_logic;
     out_data   : out std_logic_vector (SUM_WIDTH-1 downto 0)
     );
@@ -25,37 +26,15 @@ architecture Bhv of ParallelMOA is
 -- SIGNALS
 -----------------------------
 signal s_acc     : std_logic_vector (SUM_WIDTH-1 downto 0) := (others=>'0');
-signal dummy_in  : data_array (0 to NUM_OPERANDS-1);
-
-component DummyInput
-generic (
-  DATA_WIDTH   : natural := CONST_DATA_WIDTH;
-  NUM_OPERANDS : natural := CONST_NUM_OPERANDS
-);
-port (
-  in_data : in  std_logic_vector(DATA_WIDTH-1 downto 0);
-  out_data : out data_array (0 to NUM_OPERANDS-1)
-);
-end component DummyInput;
-
 
 begin
-  DummyInput_i : DummyInput
-  generic map (
-    DATA_WIDTH   => DATA_WIDTH,
-    NUM_OPERANDS => NUM_OPERANDS
-  )
-  port map (
-    in_data  => in_data,
-    out_data => dummy_in
-  );
   -- Implementation of Multi Operand Adder with Adder trees
     acc_process : process(clk_sys)
     variable v_acc : std_logic_vector (SUM_WIDTH-1 downto 0) := (others=>'0');
     begin
         if (rising_edge(clk_sys)) then
             acc_loop : for i in 0 to NUM_OPERANDS-1 loop
-                v_acc := v_acc + dummy_in(i);
+                v_acc := v_acc + in_data(i);
             end loop acc_loop;
 
         end if;

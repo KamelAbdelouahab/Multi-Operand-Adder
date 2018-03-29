@@ -45,17 +45,28 @@ architecture bhv of SerialMOA is
     );
     port (
     clk_dsp  : in  std_logic;
+    clk_sys  : in  std_logic;
     reset_n  : in  std_logic;
     in_data  : in  std_logic_vector(DATA_WIDTH-1 downto 0);
-    out_data : out std_logic_vector(SUM_WIDTH-1 downto 0)
+    in_valid : in  std_logic;
+	 out_data : out std_logic_vector(SUM_WIDTH-1 downto 0)
     );
   end component Accumulator;
 
     -- SIGNALS
     -----------------------------
   signal acc_data : std_logic_vector(DATA_WIDTH-1 downto 0);
-  signal dummy_in : data_array (0 to NUM_OPERANDS-1);
+  signal start    : std_logic := '0';
   begin
+
+--  process(clk_dsp)
+--  begin
+--    if (rising_edge(clk_sys)) then
+--		  start <= '1';
+--    else
+--        start <= '0';	 
+--    end if;
+--  end process;
 
   Serializer_i : Serializer
   generic map (
@@ -79,7 +90,9 @@ architecture bhv of SerialMOA is
   )
   port map (
     clk_dsp  => clk_dsp,
+    clk_sys  => clk_sys,
     reset_n  => reset_n,
+    in_valid => in_valid,
     in_data  => acc_data,
     out_data => out_data
   );
