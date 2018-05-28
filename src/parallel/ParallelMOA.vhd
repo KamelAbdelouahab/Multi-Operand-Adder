@@ -28,7 +28,7 @@ architecture Bhv of ParallelMOA is
 signal s_acc     : std_logic_vector (SUM_WIDTH-1 downto 0) := (others=>'0');
 
 begin
-  -- Implementation of Multi Operand Adder with Adder trees
+  -- Implementation of a Multi Operand Adder As an Adder trees
     acc_process : process(clk_sys)
     variable v_acc : std_logic_vector (SUM_WIDTH-1 downto 0) := (others=>'0');
     begin
