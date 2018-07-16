@@ -1,7 +1,7 @@
 # Multi-Operand-Adder
 Trying to Not solve the Multi-Operand-Adder problem on FPGAs
 
-Convolutional Neural Networks (CNNs) are computationally intensive algorithms that currently require dedicated hardware to be executed. In the case of FPGA-Based accelerators, we noticed that a large portion of the instanciated resources are allocated to the Multi-Operand Adders (MOAs) takes  Multi-Operand Adders (MOAs).
+Convolutional Neural Networks (CNNs) are computationally intensive algorithms that currently require dedicated hardware to be executed. In the case of FPGA-Based accelerators, we noticed that a large portion of the instanciated resources are allocated to the Multi-Operand Adders (MOAs).
 
 To reduce the footprint of MOAs, two optimization strategies, that rely on time-multiplexing and approximate computing, are investigated.
 At first glance, the two strategies looked promising, but when synthesized on the device, none of them gave the expected results. 
