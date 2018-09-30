@@ -26,13 +26,15 @@ begin
   add_proc : process(clk)
   begin
     if (reset_n = '0') then
-      v_acc     := (others => '0');
       out_valid <= '0';
+      out_data  <= (others => '0');
 
     elsif (rising_edge(clk)) then
       if (enable = '1') then
         if (in_valid = '1') then
           out_data <= in_op1 + in_op2;
+        else
+          out_data  <= (others => '0');
         end if;
         out_valid <= in_valid;
       end if;

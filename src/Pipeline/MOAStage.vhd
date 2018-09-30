@@ -41,6 +41,24 @@ architecture rtl of MOAStage is
 begin
 
   adder_gen : for i in 0 to (NUM_OPERANDS/2 - 1) generate
+    adder_gen_last: if i= (NUM_OPERANDS/2 - 1) generate
+	 last_soa: SOA
+      generic map(
+        BITWIDTH => BITWIDTH
+        )
+      port map(
+        clk       => clk,
+        reset_n   => reset_n,
+        enable    => enable,
+        in_op1    => in_data(i),
+        in_op2    => in_data(NUM_OPERANDS - i - 1),
+        in_valid  => in_valid,
+        out_data  => out_data(i),
+        out_valid => out_valid
+        );
+	 end generate adder_gen_last;
+	 
+    adder_gen_i : if i >= 0 and i < (NUM_OPERANDS/2 - 1) generate
     inst_soa : SOA
       generic map(
         BITWIDTH => BITWIDTH
@@ -50,13 +68,12 @@ begin
         reset_n   => reset_n,
         enable    => enable,
         in_op1    => in_data(i),
-        in_op2    => in_data(2*i+1),
+        in_op2    => in_data(NUM_OPERANDS - i - 1),
         in_valid  => in_valid,
         out_data  => out_data(i),
-        out_valid => out_valid
+        out_valid => OPEN
         );
-
-
-  end generate;
+	  end generate adder_gen_i;
+  end generate adder_gen;
 
 end architecture;

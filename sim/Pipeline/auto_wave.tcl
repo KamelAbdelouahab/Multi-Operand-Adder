@@ -16,7 +16,7 @@ proc add_wave {group_def inst_name} {
   foreach {obj_type obj_group_name} $obj_type_list {
     set sig_list [lsort [find signals $inst_name/*]]
     foreach sig $sig_list {
-       set CMD "add wave -noupdate -hex $group_def -group $obj_group_name $obj_type $sig"
+       set CMD "add wave -noupdate -dec $group_def -group $obj_group_name $obj_type $sig"
        # puts $CMD
        if { [catch {eval $CMD} fid] } {
        }
