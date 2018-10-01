@@ -1,7 +1,7 @@
 #Quartus rules
-*/db/*
-*/incremental_db/*
-*/output_files/*
+*/db/
+*/incremental_db/
+*/output_files/
 *.bak
 *.stp
 */altera/*
@@ -16,3 +16,5 @@
 *.qtl
 *_vmake
 *_info
+*transcript
+*.ini
