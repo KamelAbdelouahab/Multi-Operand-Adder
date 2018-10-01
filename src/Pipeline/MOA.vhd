@@ -44,6 +44,7 @@ architecture rtl of MOA is
 
   type data_array_2d is array (natural range <>) of data_array (0 to NUM_OPERANDS - 1);
   signal between_moa_stage : data_array_2d (0 to PIPLINE_STAGES-1)    := (others => (others => (others => '0')));
+  -- This joke refers to Nicole Kidmans' horror movie : the others ...
   signal valids            : std_logic_vector (0 to PIPLINE_STAGES-1) := (others => '0');
   signal s_acc             : std_logic_vector (BITWIDTH-1 downto 0)   := (others => '0');
 
@@ -118,8 +119,8 @@ begin
     elsif (rising_edge(clk)) then
       if (enable='1') then
         if (valids(PIPLINE_STAGES-1) = '1') then
-          acc_loop : for i in 0 to NUM_OPERANDS/(2**MAX_PIPELINE_STAGES) - 1  loop
-            v_acc := v_acc + between_moa_stage(PIPLINE_STAGES-1)(i);
+          acc_loop : for n in 0 to NUM_OPERANDS/(2**MAX_PIPELINE_STAGES) - 1  loop
+            v_acc := v_acc + between_moa_stage(PIPLINE_STAGES-1)(n);
           end loop acc_loop;
         end if;
       end if;

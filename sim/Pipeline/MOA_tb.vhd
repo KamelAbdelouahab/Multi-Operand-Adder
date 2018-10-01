@@ -9,6 +9,8 @@ use work.DataTypes.all;
 entity MOA_tb is
 end entity MOA_tb;
 
+
+-- WARNING  : TEST BENCH IS DEPRECTATED, PLEASE SET CONST_DATA_WIDTH to 8 BITS 
 architecture tb of MOA_tb is
 -- C.U.T
   component MOA
