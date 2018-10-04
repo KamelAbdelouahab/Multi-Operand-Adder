@@ -11,13 +11,13 @@ entity MOAStage is
     SUM_WIDTH    : integer := CONST_SUM_WIDTH
     );
   port(
-    clk       : in  std_logic;
-    reset_n   : in  std_logic;
-    enable    : in  std_logic;
-    in_data   : in  data_array (0 to NUM_OPERANDS - 1);
-    in_valid  : in  std_logic;
-    out_data  : out data_array (0 to NUM_OPERANDS/2 - 1);
-    out_valid : out std_logic
+    clk       : in     std_logic;
+    reset_n   : in     std_logic;
+    enable    : in     std_logic;
+    in_data   : in     data_array (0 to NUM_OPERANDS - 1);
+    in_valid  : in     std_logic;
+    out_data  : buffer data_array (0 to NUM_OPERANDS/2 - 1);
+    out_valid : buffer std_logic
     );
 end entity;
 
@@ -28,14 +28,14 @@ architecture rtl of MOAStage is
       BITWIDTH : integer := CONST_DATA_WIDTH
       );
     port(
-      clk       : in  std_logic;
-      reset_n   : in  std_logic;
-      enable    : in  std_logic;
-      in_op1    : in  std_logic_vector (BITWIDTH-1 downto 0);
-      in_op2    : in  std_logic_vector (BITWIDTH-1 downto 0);
-      in_valid  : in  std_logic;
-      out_data  : out std_logic_vector (BITWIDTH-1 downto 0);
-      out_valid : out std_logic
+      clk       : in     std_logic;
+      reset_n   : in     std_logic;
+      enable    : in     std_logic;
+      in_op1    : in     std_logic_vector (BITWIDTH-1 downto 0);
+      in_op2    : in     std_logic_vector (BITWIDTH-1 downto 0);
+      in_valid  : in     std_logic;
+      out_data  : buffer std_logic_vector (BITWIDTH-1 downto 0);
+      out_valid : buffer std_logic
       );
   end component;
 begin
@@ -57,7 +57,7 @@ begin
         out_valid => out_valid
         );
 	 end generate adder_gen_last;
-	 
+
     adder_gen_i : if i >= 0 and i < (NUM_OPERANDS/2 - 1) generate
     inst_soa : SOA
       generic map(
