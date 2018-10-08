@@ -6,9 +6,9 @@ use work.DataTypes.all;
 
 entity MOAStage is
   generic(
-    BITWIDTH     : integer := CONST_DATA_WIDTH;
-    NUM_OPERANDS : integer := CONST_NUM_OPERANDS;
-    SUM_WIDTH    : integer := CONST_SUM_WIDTH
+    BITWIDTH     : integer;
+    NUM_OPERANDS : integer;
+    PIPELINE     : string
     );
   port(
     clk       : in     std_logic;
@@ -25,7 +25,8 @@ end entity;
 architecture rtl of MOAStage is
   component SOA is
     generic(
-      BITWIDTH : integer := CONST_DATA_WIDTH
+      BITWIDTH : integer;
+      PIPELINE : string
       );
     port(
       clk       : in     std_logic;
@@ -42,9 +43,10 @@ begin
 
   adder_gen : for i in 0 to (NUM_OPERANDS/2 - 1) generate
     adder_gen_last: if i= (NUM_OPERANDS/2 - 1) generate
-	 last_soa: SOA
+	  last_soa: SOA
       generic map(
-        BITWIDTH => BITWIDTH
+        BITWIDTH => BITWIDTH,
+        PIPELINE => PIPELINE
         )
       port map(
         clk       => clk,
@@ -61,7 +63,8 @@ begin
     adder_gen_i : if i >= 0 and i < (NUM_OPERANDS/2 - 1) generate
     inst_soa : SOA
       generic map(
-        BITWIDTH => BITWIDTH
+        BITWIDTH => BITWIDTH,
+		    PIPELINE => PIPELINE
         )
       port map(
         clk       => clk,
