@@ -9,14 +9,14 @@ entity SOA is
     BITWIDTH : integer := CONST_DATA_WIDTH
     );
   port(
-    clk       : in  std_logic;
-    reset_n   : in  std_logic;
-    enable    : in  std_logic;
-    in_op1    : in  std_logic_vector (BITWIDTH-1 downto 0);
-    in_op2    : in  std_logic_vector (BITWIDTH-1 downto 0);
-    in_valid  : in  std_logic;
-    out_data  : out std_logic_vector (BITWIDTH-1 downto 0);
-    out_valid : out std_logic
+    clk       : in     std_logic;
+    reset_n   : in     std_logic;
+    enable    : in     std_logic;
+    in_op1    : in     std_logic_vector (BITWIDTH-1 downto 0);
+    in_op2    : in     std_logic_vector (BITWIDTH-1 downto 0);
+    in_valid  : in     std_logic;
+    out_data  : buffer std_logic_vector (BITWIDTH-1 downto 0);
+    out_valid : buffer std_logic
     );
 end entity;
 
