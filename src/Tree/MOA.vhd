@@ -53,7 +53,7 @@ begin
         generic map(
           BITWIDTH     => BITWIDTH,
           NUM_OPERANDS => NUM_OPERANDS,
-          PIPELINE     => "OFF"
+          PIPELINE     => "ON"
           )
         port map(
           clk       => clk,
@@ -71,7 +71,7 @@ begin
         generic map(
           BITWIDTH     => BITWIDTH,
           NUM_OPERANDS => NUM_OPERANDS/(2**i),
-          PIPELINE     => "OFF"
+          PIPELINE     => "ON"
           )
         port map(
           clk       => clk,
@@ -89,7 +89,7 @@ begin
         generic map(
           BITWIDTH     => BITWIDTH,
           NUM_OPERANDS => NUM_OPERANDS/(2**i),
-          PIPELINE     => "OFF"
+          PIPELINE     => "ON"
           )
         port map(
           clk       => clk,

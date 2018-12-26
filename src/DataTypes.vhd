@@ -5,7 +5,7 @@ library ieee;
 
 package DataTypes is
     constant CONST_DATA_WIDTH     : natural := 4;                                -- Bitwidth
-    constant CONST_NUM_OPERANDS   : natural := 128;                    -- Number of operands
+    constant CONST_NUM_OPERANDS   : natural := 64;                    -- Number of operands
     constant CONST_REG_STRIDE     : natural := 3;                -- Stride between registers
     constant MAX_PIPLINE_STAGES   : natural := natural(ceil(log2(real(CONST_NUM_OPERANDS))));
     constant CONST_PIPLINE_STAGES : natural := MAX_PIPLINE_STAGES;         -- Pipeline depth
